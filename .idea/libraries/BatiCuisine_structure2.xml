@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BatiCuisine_structure2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/BatiCuisine_structure/executable/BatiCuisine_structure.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -3,9 +3,8 @@ package org.BatiCuisine.Service;
 import org.BatiCuisine.Model.Quote;
 import org.BatiCuisine.Repository.Interfaces.QuoteRepository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class QuoteService {
 
@@ -19,19 +18,23 @@ public class QuoteService {
         quoteRepository.addQuote(quote);
     }
 
-    public Quote getQuoteById(UUID quoteId) {
-        return quoteRepository.getQuoteById(quoteId);
-    }
-
     public void updateQuote(Quote quote) {
         quoteRepository.updateQuote(quote);
     }
 
-    public List<Quote> getAllQuotes() {
-        return quoteRepository.getAllQuotes();
-    }
-
     public Optional<Quote> getQuoteByProjectID(UUID quoteId) {
         return quoteRepository.getQuoteByProjectID(quoteId);
+    }
+
+    public Map<UUID, Double> getTotalCost(List<Quote> quotes){
+        Map<UUID, Double> quotesHashMap = new HashMap<>();
+        for (Quote quote: quotes){
+            quotesHashMap.put(quote.getProject().getClient().getClientID(), quote.getEstimatedAmount());
+        }
+        return quotes.stream().collect(Collectors.toMap(
+                quote -> quote.getProject().getClient().getClientID() ,
+                quote -> quote.getEstimatedAmount()
+        ));
+
     }
 }
